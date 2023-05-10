@@ -3,13 +3,10 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="D:/��ѧ�γ�/�������ۺ�ʵ��/Project/LogicServer">
         <classes><class name="com.example.demo.classes.MyJasonTest">
-            <methods><include name="testToJason"/>
-                <include name="testToJasonList"/>
-                <include name="testStandard"/>
-            </methods></class><class name="com.example.demo.controller.PoetryControllerTest">
-            <methods><include name="testRecommendByRand"/>
-            </methods>
-        </class>
-        </classes>
-    </test>
-</suite>
+            <methods><include name="testToJason"/><include name="testToJasonList"/>
+                <include name="testStandard"/></methods></class>
+            <class name="com.example.demo.controller.PoetryControllerTest">
+                <methods><include name="testRecommendByRand"/></methods>
+            </class>
+            <class name="com.example.demo.serve.UserServeTest"><methods>
+                <include name="testLogin"/><include name="testRegister"/><include name="testModify"/><include name="testModifyImage"/><include name="testFindUsernameById"/><include name="testFindImageByUID"/><include name="testFollow"/><include name="testCancelFollow"/><include name="testSearchFollowByUid"/><include name="testCollect"/><include name="testCancelCollect"/><include name="testSearchCollectByUid"/></methods></class></classes></test></suite>
