@@ -13,12 +13,16 @@ public class WritesServe {
     }
 
     public String insetWrite(String UID,String headline,String content){
-        if(daoWrites.insertWrites(UID,headline,content)>0)return "success";
+        if(daoWrites.insertWrites(UID,headline,content)>0){
+            return "success";
+        }
         return "error";
     }
 
     public String deleteWrite(String UID,String id){
-        if(daoWrites.deleteWrites(UID,id)>0)return "success";
+        if(daoWrites.deleteWrites(UID,id)>0){
+            return "success";
+        }
         return "error";
     }
 

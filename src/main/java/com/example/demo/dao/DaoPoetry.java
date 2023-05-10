@@ -36,7 +36,6 @@ public class DaoPoetry {
         }
         scanner.close();
 
-
         map2.put("主题","ZhuTi");map2.put("ZhuTi","主题");
         map2.put("人物","RenWu");map2.put("RenWu","人物");
         map2.put("体裁","TiCai");map2.put("TiCai","体裁");
@@ -72,14 +71,20 @@ public class DaoPoetry {
     }
 
     public List<Poetry> searchByTag(String tag){
-        //内容、诗人名、诗名
+        //标签
         String sql = "SELECT * FROM poetry where tag like'%"+tag+"%' order by rand() limit 100";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Poetry.class));
     }
 
     public List<Poetry> searchID(String id){
-        //内容、诗人名、诗名
+        //诗id
         String sql = "SELECT * FROM poetry where id="+id;
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Poetry.class));
+    }
+
+    public List<Poetry> searchPoetname(String poetname){
+        //诗id
+        String sql = "SELECT * FROM poetry where poet_name='"+poetname+"'";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(Poetry.class));
     }
 

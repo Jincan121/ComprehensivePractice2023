@@ -42,7 +42,7 @@ public class DaoUser {
     }
 
     public List<MyUser> selectTableByUID(String UID){
-        String sql = "select * from User where UID='"+UID+"' limit 1";
+        String sql = "select * from User where UID="+UID+" limit 1";
         return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>(MyUser.class));
     }
 

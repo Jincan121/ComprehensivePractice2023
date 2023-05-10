@@ -93,13 +93,20 @@ public class GameServe {
     }
 
     public String playPoetLevel(List<String> content,String poet){
+        if(content.size()>10){
+            return "error";
+        }
         String[] target=new String[]{"empty","empty","empty","empty","empty","empty","empty","empty","empty","empty"};
-
+        String []poetId=new String[10];
         for(int i=0;i<content.size();i++){
             if("".equals(content.get(i))){
                 continue;
             }
             else {
+                if(content.get(i).length()<3){
+                    target[i]="false";
+                    continue;
+                }
                 String[]sp=content.get(i).split(",|，|！|!|？");
                 boolean bol=true;
                 for(String iter:sp){
@@ -109,9 +116,30 @@ public class GameServe {
                         bol=false;
                         break;
                     }
+                    else {
+                        //小句是否来自同一首诗
+                        if(poetId[i]==null){
+                            poetId[i]=list.get(0).getId();
+                        }
+                        else {
+                            if(!list.get(0).getId().equals(poetId[i])){
+                                target[i]="false";
+                                bol=false;
+                                break;
+                            }
+                        }
+
+                    }
                 }
                 if(bol){
                     target[i]="true";
+                    //与其他句子是否重复
+                    for(int j=0;j<i;j++){
+                        if(poetId[j]!=null&&poetId[j].equals(poetId[i])){
+                            target[i]="false";
+                        }
+                    }
+
                 }
             }
         }

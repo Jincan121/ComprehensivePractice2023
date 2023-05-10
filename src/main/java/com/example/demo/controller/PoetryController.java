@@ -36,9 +36,15 @@ public class PoetryController {
     }
 
     @CrossOrigin(origins = {"*"})
+    @RequestMapping("/searchByPoetname")
+    public String searchByPoetname(@RequestParam("poetname") String poetname) {
+        return poetryServe.searchByPoetname(poetname);
+    }
+
+    @CrossOrigin(origins = {"*"})
     @RequestMapping("/searchByID")
     public String searchByID(@RequestParam("id") String id) {
-        return poetryServe.searchByID(id);
+        return poetryServe.searchById(id);
     }
 
     @CrossOrigin(origins = {"*"})

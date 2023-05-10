@@ -36,9 +36,9 @@ public class PoetryServe {
         return JSON.toJSONString(list);
     }
 
-    public String recommendByUser(String UID){
+    public String recommendByUser(String uid){
         //查询supertag
-        List<Recommend>listTag=daoPoetry.selectRecommendByUID(UID);
+        List<Recommend>listTag=daoPoetry.selectRecommendByUID(uid);
         if(listTag.isEmpty()){
             System.out.println("recommend中没有用户数据");
             return this.recommendByRand();
@@ -117,7 +117,21 @@ public class PoetryServe {
         return JSON.toJSONString(list);
     }
 
-    public String searchByID(String id){
+    public String searchByPoetname(String poetname){
+        List<Poetry> list=daoPoetry.searchPoetname(poetname);
+        if(list.isEmpty()){
+            return "error";
+        }
+        Iterator<Poetry> iter=list.iterator();
+        while(iter.hasNext()){
+            Poetry poetry=iter.next();
+
+            poetry.setContent(MyJason.standard(poetry.getContent()));
+        }
+        return JSON.toJSONString(list);
+    }
+
+    public String searchById(String id){
         List<Poetry> list=daoPoetry.searchID(id);
         if(list.isEmpty()){
             return "error";
@@ -134,7 +148,9 @@ public class PoetryServe {
         List<Support>list=daoPoetry.selectSupportByUID(UID);
         Iterator<Support>iter=list.listIterator();
         while(iter.hasNext()){
-            if(iter.next().getId().equals(id))return "true";
+            if(iter.next().getId().equals(id)){
+                return "true";
+            }
         }
         return "false";
     }
@@ -144,7 +160,9 @@ public class PoetryServe {
             return "existing";
         }
         else {
-            if(daoPoetry.insertSupport(UID,id)==0)return "error";
+            if(daoPoetry.insertSupport(UID,id)==0){
+                return "error";
+            }
             else {
                 String tags=daoPoetry.searchTagByID(id);
 
@@ -157,18 +175,20 @@ public class PoetryServe {
         }
     }
 
-    public String cancelSupport(String UID,String id){
-        if(findSupportExsit(UID,id).equals("false")){
+    public String cancelSupport(String uid,String id){
+        if(findSupportExsit(uid,id).equals("false")){
             return "not existing";
         }
         else {
-            if(daoPoetry.cancelSupport(UID,id)==0)return "error";
+            if(daoPoetry.cancelSupport(uid,id)==0){
+                return "error";
+            }
             else {
                 String tags=daoPoetry.searchTagByID(id);
 
                 String []tag=tags.split(",");
                 for(int i=0;i<tag.length;i++){
-                    daoPoetry.cancelRecommend(UID,tag[i]);
+                    daoPoetry.cancelRecommend(uid,tag[i]);
                 }
                 return "success";
             }

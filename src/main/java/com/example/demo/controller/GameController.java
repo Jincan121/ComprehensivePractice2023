@@ -25,11 +25,13 @@ public class GameController {
         return gameServe.playFeiHuaLing(content);
     }
 
+    @CrossOrigin(origins = {"*"})
     @RequestMapping("/passFeihualing")
     public String passFeihualing(@RequestParam("UID") String uid,@RequestParam("content") String content) {
         return gameServe.passFeihualing(uid,content);
     }
 
+    @CrossOrigin(origins = {"*"})
     @RequestMapping("/findFeihualing")
     public String findFeihualing(@RequestParam("UID") String uid) {
         return gameServe.findFeihualing(uid);
@@ -41,11 +43,13 @@ public class GameController {
         return gameServe.playPoetLevel(content,poet);
     }
 
+    @CrossOrigin(origins = {"*"})
     @RequestMapping("/passPoetLevel")
     public String passPoetLevel(@RequestParam("UID") String uid,@RequestParam("poet") String poet) {
         return gameServe.passPoetLevel(uid,poet);
     }
 
+    @CrossOrigin(origins = {"*"})
     @RequestMapping("/findPoetLevel")
     public String findPoetLevel(@RequestParam("UID") String uid) {
         return gameServe.findPoetLevel(uid);
