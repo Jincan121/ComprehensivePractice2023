@@ -117,6 +117,20 @@ public class PoetryServe {
         return JSON.toJSONString(list);
     }
 
+    public String searchByPoetname(String poetname){
+        List<Poetry> list=daoPoetry.searchPoetname(poetname);
+        if(list.isEmpty()){
+            return "error";
+        }
+        Iterator<Poetry> iter=list.iterator();
+        while(iter.hasNext()){
+            Poetry poetry=iter.next();
+
+            poetry.setContent(MyJason.standard(poetry.getContent()));
+        }
+        return JSON.toJSONString(list);
+    }
+
     public String searchById(String id){
         List<Poetry> list=daoPoetry.searchID(id);
         if(list.isEmpty()){
